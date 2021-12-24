@@ -89,10 +89,10 @@ function run() {
         for (
           var theta = thetaMin + getThetaChangeRate(thetaMin, offset * lineSpacing / period, rate, factor); 
           theta < thetaMax; 
-          theta += getThetaChangeRate(theta, lineSpacing, rate, factor)
+          theta += 0.0001//getThetaChangeRate(theta, lineSpacing, rate, factor)
         ) {
           thetaOld = (theta >= thetaMin) ? theta : thetaMin;
-          thetaNew = theta + getThetaChangeRate(theta, lineLength, rate, factor);
+          thetaNew = theta + 0.0001;//getThetaChangeRate(theta, lineLength, rate, factor);
 
           if (thetaNew <= thetaMin) {
             continue;
@@ -124,7 +124,7 @@ function run() {
     // now that we have 3d coordinates, project them into 2d space:
     var point = projectTo2d(x, y, z);
     // calculate point's color alpha level:
-    point.alpha = Math.atan((y * factor / rate * 0.1 + 0.02 - z) * 40) * 0.35 + 0.65;
+    point.alpha = 1;//Math.atan((y * factor / rate * 0.1 + 0.02 - z) * 40) * 0.35 + 0.6;
 
     return point;
   }
