@@ -2,7 +2,8 @@ function run(){
     var ctx = document.getElementById('scene').getContext('2d');
     var x0=250,y0=100;
 	var startFrom = 0;
-	
+	var starstate=70;
+	var sign=1;
 	
 	renderFrame();
 	
@@ -29,9 +30,10 @@ function run(){
 				ctx.strokeStyle="#660000";
 			}
 			
-			ctx.moveTo(x0+8*i*Math.sin(i-0.01),y0+20*(i-0.01));
+			ctx.moveTo(x0+8*i*Math.sin(i-0.03),y0+20*(i-0.03));
 			ctx.lineTo(x0+8*i*Math.sin(i),y0+20*i);
 		}
+
 		//绿色丝带
 		for(var i=startFrom;i<11/2*Math.PI;i+=0.08){
 			if(Math.sin(i-Math.PI/2)>-0.05){
@@ -45,13 +47,18 @@ function run(){
 				ctx.strokeStyle="#003300";
 			}
 			
-			ctx.moveTo(x0-8*i*Math.sin(i-0.01),y0+20*(i-0.01));
+			ctx.moveTo(x0-8*i*Math.sin(i-0.03),y0+20*(i-0.03));
 			ctx.lineTo(x0-8*i*Math.sin(i),y0+20*i);
 		}
+
 		//小星星
+		if(starstate==70)sign=1;
+		if(starstate==160) sign=-1;
+		starstate = starstate + sign*3;
 		ctx.stroke();
 		ctx.beginPath();
-		ctx.strokeStyle="#ffff8f";
+	 	ctx.strokeStyle="rgb("+starstate+"," +starstate+", 0)";
+		
 		for(var angle=0;angle<2*Math.PI;angle+=2/5*Math.PI){
 			ctx.moveTo(250-10*Math.sin(angle),100-10*Math.cos(angle));
 			ctx.lineTo(250-6*Math.sin(angle+1/5*Math.PI),100-6*Math.cos(angle+1/5*Math.PI));
